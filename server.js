@@ -1,11 +1,34 @@
-import express from 'express';
-import http from 'http';
-import io from 'socket.io';
+// ===================================================
+//
+//                      IMPORTS
+//
+// ===================================================
 
-let app = express();
+// so we only need to build the server.js file
+// everything else will be transpiled at load time
+import "babel-register";
+
+import express  from 'express';
+import http     from 'http';
+import io       from 'socket.io';
+import * as U   from './js/serverutils.js';
+
+// ===================================================
+//
+//                      SETUP
+//
+// ===================================================
+
+let app     = express();
 app.use(express.static('.'));
-let server = http.Server(app);
-let socket = io(server);
+let server  = http.Server(app);
+let socket  = io(server);
+
+// ===================================================
+//
+//                      CONNECT
+//
+// ===================================================
 
 socket.on('connection', function(conn) {
     console.log('a user connected');

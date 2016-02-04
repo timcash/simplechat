@@ -6,6 +6,7 @@
   "author": "Tim Cash <timcash@gmail.com>",
   "scripts": {
     "test": "mocha",
+    "testwatch": "mowatch",
     "start": "node build/server.js",
     "build": "babel server.js -o build/server.js",
     "buildwatch": "babel server.js --watch -o server.build.js"
@@ -35,6 +36,7 @@
     "mowatch": "^0.1.0"
   },
   "dependencies": {
+    "babel-register": "^6.4.3",
     "express": "^4.10.2",
     "socket.io": "^1.4.5"
   }

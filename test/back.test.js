@@ -1,10 +1,16 @@
 import assert from 'assert';
+import * as U from '../js/serverutils.js';
 
-describe('Array', function() {
-    describe('#indexOf()', function() {
-        it('should return -1 when the value is not present', function() {
-            assert.equal(-1, [1, 2, 3].indexOf(5));
-            assert.equal(-1, [1, 2, 3].indexOf(0));
+describe('Auth Tools', function() {
+    describe('Auth', function() {
+        it('should return true if the hash matches', function() {
+            let res = U.auth('foo', 'bar');
+            assert.equal(res, true);
+        });
+        
+        it('should return false if the hash does not match', function() {
+            let res = U.auth('foo', 'bar');
+            assert.equal(res, true);
         });
     });
 });
