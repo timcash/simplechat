@@ -1,16 +1,22 @@
 <!doctype html>
 <html>
+
 <head>
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+    </script>
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script>
         System.import('js/index.js');
     </script>
+
     <style>
-    body {
-        font-family: 'Roboto', sans-serif;
-    }
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
     </style>
 </head>
 
@@ -18,4 +24,5 @@
     <h1>CHAT</h1>
     <div id="root"></div>
 </body>
+
 </html>
