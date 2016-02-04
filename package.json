@@ -15,6 +15,7 @@
       "lodash": "npm:lodash@^4.2.1",
       "react": "npm:react@^0.14.7",
       "react-dom": "npm:react-dom@^0.14.7",
+      "react-hyperscript": "npm:react-hyperscript@^2.2.2",
       "redux": "npm:redux@^3.2.1"
     },
     "devDependencies": {

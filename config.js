@@ -20,6 +20,7 @@ System.config({
     "lodash": "npm:lodash@4.2.1",
     "react": "npm:react@0.14.7",
     "react-dom": "npm:react-dom@0.14.7",
+    "react-hyperscript": "npm:react-hyperscript@2.2.2",
     "redux": "npm:redux@3.2.1",
     "virtual-dom": "npm:virtual-dom@2.1.1",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -66,6 +67,10 @@ System.config({
     "npm:core-util-is@1.0.2": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
+    "npm:data-set@3.1.0": {
+      "individual": "npm:individual@2.0.0",
+      "weakmap-shim": "npm:weakmap-shim@1.0.0"
+    },
     "npm:error@4.4.0": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "camelize": "npm:camelize@1.0.0",
@@ -104,6 +109,10 @@ System.config({
     },
     "npm:react-dom@0.14.7": {
       "react": "npm:react@0.14.7"
+    },
+    "npm:react-hyperscript@2.2.2": {
+      "react": "npm:react@0.14.7",
+      "virtual-hyperscript": "npm:virtual-hyperscript@4.6.0"
     },
     "npm:react@0.14.7": {
       "fbjs": "npm:fbjs@0.6.1",
@@ -145,6 +154,12 @@ System.config({
       "next-tick": "npm:next-tick@0.2.2",
       "x-is-array": "npm:x-is-array@0.1.0",
       "x-is-string": "npm:x-is-string@0.1.0"
+    },
+    "npm:virtual-hyperscript@4.6.0": {
+      "data-set": "npm:data-set@3.1.0",
+      "error": "npm:error@4.4.0",
+      "next-tick": "npm:next-tick@0.2.2",
+      "vtree": "github:Raynos/vtree@hooks"
     }
   }
 });
