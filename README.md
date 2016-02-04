@@ -1,8 +1,9 @@
 ## Simple Chat Application.
 #### Tools / Tech used
+    * Mocha      (test)
     * React      (view)
-    * Redux      (state sync)
-    * Socket.IO  (websocket)
+    * Redux      (frontend state sync)
+    * Socket.IO  (websocket / data transport)
     * Express    (server / HTTP)
     * JSPM       (frontend package management)
     * Node.js
