@@ -8,6 +8,11 @@ describe('Auth Tools', function() {
             assert.equal(res.success, true);
         });
 
+        it('should add the user to the user_store', function() {
+            let res = U.auth('carlsagan', 'guest', {});
+            assert.deepEqual(res.store, {'carlsagan':'loggedin'});
+        });
+
         it('should return false if the hash does not match', function() {
             let res = U.auth('carlsagan', 'notaguest', {});
             assert.equal(res.success, false);

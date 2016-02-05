@@ -1,15 +1,35 @@
 import L             from 'lodash/fp';
-import react         from 'react';
+import react, { Component } from 'react';
 import {render}      from 'react-dom';
 import h             from 'react-hyperscript';
 import redux         from 'redux';
 import * as stypes   from './stypes.js';
-const { Component } = react;
+
+let s = {
+    color:"green"
+};
+
+const usernameInput = () => {
+    return h('input');
+};
+
+const passwordInput = () => {
+    return h('input');
+};
+
+const loginButton = (args) => {
+    return h('div', {'onClick':args.doit}, 'Login');
+};
 
 class ChatApp extends Component {
     render() {
         return h('div', {}, [
-            h('h1', 'hello from react')
+            h('h1', {style:s}, 'hello from react'),
+            h(usernameInput),
+            h(passwordInput),
+            h(loginButton, {doit:(e)=>{
+                console.log("login");
+            }})
         ]);
     }
 }
