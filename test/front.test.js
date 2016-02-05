@@ -1,6 +1,6 @@
-import assert       from 'assert';
-import * as Act     from '../js/actions.js';
-import * as stypes  from '../js/stypes.js';
+import assert from 'assert';
+import * as Act from '../js/actions.js';
+import * as stypes from '../js/stypes.js';
 
 describe('Redux Tests', function() {
     describe('Actions', function() {
@@ -15,17 +15,32 @@ describe('Redux Tests', function() {
         });
 
         it('authRequest matches the format', function() {
+            let action = Act.authRequest('carlsagan', 'guest');
+            let match = {
+                type: stypes.AUTH_REQ,
+                username: 'carlsagan',
+                hash: 'guest',
+            };
 
             assert.deepEqual(action, match);
         });
 
         it('authReply matches the format', function() {
-
+            let action = Act.authResponse('AACVX-133443-FFFF');
+            let match = {
+                type: stypes.AUTH_RESP,
+                token: 'AACVX-133443-FFFF'
+            };
             assert.deepEqual(action, match);
         });
 
         it('repeatMessage matches the format', function() {
-
+            let action = Act.repeatMessage('carlsagan', 'billions and billions');
+            let match = {
+                type: stypes.REPEAT_MSG,
+                author: 'carlsagan',
+                message: 'billions and billions',
+            };
             assert.deepEqual(action, match);
         });
     });
