@@ -60,13 +60,19 @@ socket.on('connection', function (conn) {
         socket.emit(stypes.REPEAT_MSG, msg);
     });
 
-    conn.on(stypes.AUTH, function (msg) {
+    conn.on(stypes.AUTH_REQ, function (msg) {
         var user = msg.username;
         var hash = msg.hash;
         var resp = U.auth(user, hash, user_store);
         var authed = resp.success;
         user_store = resp.store;
-        conn.emit(stypes.AUTH_RESP, { 'authed': true });
+        if (authed) {
+            conn.emit(stypes.AUTH_RESP, { 'token': 'FFFF-1111-AAAAA' });
+        } else {
+            conn.emit(stypes.AUTH_RESP, { 'token': 'failed' });
+        }
+
+        console.log('AUTH ATTEMPTED ' + user + ' ' + hash);
     });
 
     conn.on('disconnect', function () {

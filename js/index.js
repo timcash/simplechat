@@ -14,6 +14,7 @@ import * as stypes              from './stypes.js';
 import * as displays            from './display.js';
 import * as containers          from './containers.js';
 import * as reducers            from './reducers.js';
+import * as actions             from './actions.js';
 import createLogger             from 'redux-logger';
 
 const loggerMiddleware = createLogger();
@@ -59,6 +60,16 @@ setInterval(()=>{
 
 _Socket.on(stypes.REPEAT_MSG, (msg)=>{
     console.log(msg);
+});
+
+_Socket.on(stypes.AUTH_RESP, (msg)=>{
+    if(msg.token !== 'failed') {
+        console.log(`AUTH: Token ${msg.token}`);
+        store.dispatch(actions.authResponse(msg.token));
+    }
+    else {
+        console.log(`AUTH: Failed to login`);
+    }
 });
 
 // ===================================================

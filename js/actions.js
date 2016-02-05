@@ -30,11 +30,15 @@ export const repeatMessage = (author, message) => {
 };
 
 export const authRequest = (username, hash) => {
-    return {
+    let m = {
         type: stypes.AUTH_REQ,
         username: username,
         hash: hash
     };
+
+    _Socket.emit(stypes.AUTH_REQ, m);
+
+    return m;
 };
 
 export const authResponse = (token) => {

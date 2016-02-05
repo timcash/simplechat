@@ -41,13 +41,20 @@ socket.on('connection', (conn) => {
         socket.emit(stypes.REPEAT_MSG, msg);
     });
 
-    conn.on(stypes.AUTH, (msg) => {
+    conn.on(stypes.AUTH_REQ, (msg) => {
         let user    = msg.username;
         let hash    = msg.hash;
         let resp    = U.auth(user, hash, user_store);
         let authed  = resp.success;
         user_store  = resp.store;
-        conn.emit(stypes.AUTH_RESP, {'authed':true});
+        if(authed) {
+            conn.emit(stypes.AUTH_RESP, {'token':'FFFF-1111-AAAAA'});
+        }
+        else {
+            conn.emit(stypes.AUTH_RESP, {'token':'failed'});
+        }
+
+        console.log(`AUTH ATTEMPTED ${user} ${hash}`);
     });
 
     conn.on('disconnect', () => {

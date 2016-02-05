@@ -3,6 +3,10 @@ import * as Act from '../js/actions.js';
 import * as Red from '../js/reducers.js';
 import * as stypes from '../js/stypes.js';
 
+global._Socket = {
+    emit:()=>{}
+};
+
 describe('Redux Tests', function() {
     describe('Actions', function() {
         it('addMessage matches the format', function() {
@@ -25,6 +29,7 @@ describe('Redux Tests', function() {
 
             assert.deepEqual(action, match);
         });
+
 
         it('authResponse matches the format', function() {
             let action = Act.authResponse('AACVX-133443-FFFF');
@@ -76,11 +81,11 @@ describe('Redux Tests', function() {
 
         it('repeatMessage appends the message to the state', function() {
             let act = Act.repeatMessage('carlsagan', 'foobar');
-            let state = Red.repeatMessage([], act);
-            let match = ['foobar'];
+            let state = Red.repeatMessage({messages:[]}, act);
+            let match = {messages:['foobar']};
             assert.deepEqual(state, match);
         });
-        
+
     });
 
     describe('Display', function() {
