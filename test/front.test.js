@@ -1,5 +1,6 @@
 import assert from 'assert';
 import * as Act from '../js/actions.js';
+import * as Red from '../js/reducers.js';
 import * as stypes from '../js/stypes.js';
 
 describe('Redux Tests', function() {
@@ -47,9 +48,18 @@ describe('Redux Tests', function() {
 
     describe('Reducers', function() {
 
-        it('authRequest changes the auth state to waiting_for_auth', function() {
+        it('authRequest changes the auth state to authing', function() {
+            let act = Act.authRequest('carlsagan', 'guest');
+            let state = Red.authRequest({
+                'messages': [],
+                'authed': 'deauthed'
+            }, act);
+            let match = {
+                'messages': [],
+                'authed': 'authing'
+            };
 
-            assert.deepEqual(reduce, match);
+            assert.deepEqual(state, match);
         });
 
         it('authReply changes the auth state to authed or failed', function() {

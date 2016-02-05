@@ -1,3 +1,6 @@
 export const authRequest = (state, action) => {
-    return state;
+    return {
+        ...state,
+        authed:'authing'
+    };
 };

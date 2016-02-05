@@ -27,6 +27,6 @@ export const passwordInput = () => {
     return h('div', {}, h('input'));
 };
 
-export const loginButton = (args) => {
-    return h('div', {'onClick':args.doit}, 'Login');
+export const loginButton = ({onClick}) => {
+    return h('div', {onClick}, 'Login');
 };

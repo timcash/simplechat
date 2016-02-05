@@ -29,14 +29,13 @@ let s = {
     color:"green"
 };
 
-
 class ChatApp extends Component {
     render() {
         return h('div', {}, [
             h('h1', {style:s}, 'hello from react'),
             h(displays.usernameInput),
             h(displays.passwordInput),
-            h(displays.loginButton, {doit:(e)=>{
+            h(displays.loginButton, {onClick:(e)=>{
                 console.log("login");
             }}),
             h(containers.messageListContainer)

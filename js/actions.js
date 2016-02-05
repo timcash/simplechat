@@ -1,4 +1,4 @@
-import * as stypes  from './stypes.js';
+import * as stypes from './stypes.js';
 
 export const addMessage = (message) => {
     return {
@@ -18,8 +18,8 @@ export const repeatMessage = (author, message) => {
 export const authRequest = (username, hash) => {
     return {
         type: stypes.AUTH_REQ,
-        username : username,
-        hash : hash
+        username: username,
+        hash: hash
     };
 };
 
