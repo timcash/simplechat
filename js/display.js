@@ -49,8 +49,12 @@ export const loginButton = ({onClick, style}) => {
     return h('a.waves-effect.waves-light.btn', {onClick, style}, 'Login');
 };
 
-export const loginForm = ({username, password, onUserChange, onPasswordChange, onLoginClick}) => {
-    return h('div', {}, [
+export const loginForm = ({username, password, visible, onUserChange, onPasswordChange, onLoginClick}) => {
+    let style = {
+        'visibility': visible
+    };
+
+    return h('div', {style}, [
         h(usernameInput, {onChange:onUserChange}),
         h(passwordInput, {onChange:onPasswordChange}),
         h(loginButton,   {onClick:(e)=>{

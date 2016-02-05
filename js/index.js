@@ -28,6 +28,8 @@ const loggerMiddleware = createLogger();
 let actionMap = {};
 actionMap[stypes.PASSWORD_CHANGE]   = reducers.passwordChange;
 actionMap[stypes.USER_CHANGE]       = reducers.userChange;
+actionMap[stypes.AUTH_RESP]         = reducers.authResponse;
+actionMap[stypes.AUTH_REQ]          = reducers.authRquest;
 
 let store = createStore((s={messages:[]}, a)=>{
     if(actionMap[a.type]) return actionMap[a.type](s, a);

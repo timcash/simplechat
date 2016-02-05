@@ -8,6 +8,15 @@ import { connect }  from 'react-redux';
 //
 // ===================================================
 
+const isLoginFormVisible = (token) => {
+    if(token === 'failed') return 'visible';
+    if(token === 'authing') return 'visible';
+    if(token === 'deauthed') return 'visible';
+    if(token === undefined) return 'visible';
+    if(token === null) return 'visible';
+    return 'hidden';
+};
+
 const stateToPropsListContainer = ({messages}) => {
     return { messages };
 };
@@ -18,8 +27,8 @@ export const messageListContainer = connect(
 )(display.messageList);
 
 
-const stateToPropsLoginForm = ({username, password}) => {
-    return {username, password};
+const stateToPropsLoginForm = ({username, password, authed}) => {
+    return {username, password, visible:isLoginFormVisible(authed)};
 };
 
 const dispatchToPropsLoginForm = (dispatch) => {
