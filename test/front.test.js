@@ -26,7 +26,7 @@ describe('Redux Tests', function() {
             assert.deepEqual(action, match);
         });
 
-        it('authReply matches the format', function() {
+        it('authResponse matches the format', function() {
             let action = Act.authResponse('AACVX-133443-FFFF');
             let match = {
                 type: stypes.AUTH_RESP,
@@ -58,18 +58,27 @@ describe('Redux Tests', function() {
                 'messages': [],
                 'authed': 'authing'
             };
-
             assert.deepEqual(state, match);
         });
 
-        it('authReply changes the auth state to authed or failed', function() {
-
-            assert.deepEqual(reduce, match);
+        it('authResponse changes the auth state to authed or failed', function() {
+            let act = Act.authResponse('AACVX-133443-FFFF');
+            let state = Red.authResponse({
+                'messages': [],
+                'authed': 'deauthed'
+            }, act);
+            let match = {
+                'messages': [],
+                'authed': 'AACVX-133443-FFFF'
+            };
+            assert.deepEqual(state, match);
         });
 
         it('repeatMessage appends the message to the state', function() {
-
-            assert.deepEqual(reduce, match);
+            let act = Act.repeatMessage('carlsagan', 'foobar');
+            let state = Red.repeatMessage([], act);
+            let match = ['foobar'];
+            assert.deepEqual(state, match);
         });
     });
 
