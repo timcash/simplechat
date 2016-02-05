@@ -51,14 +51,26 @@ var socket = (0, _socket2.default)(server);
 //
 // ===================================================
 
+var user_store = {};
+
 socket.on('connection', function (conn) {
     console.log('connection ' + conn.id);
 
     conn.on(stypes.ADD_MSG, function (msg) {
-        _socket2.default.emit(stypes.REPEAT_MSG, msg);
+        socket.emit(stypes.REPEAT_MSG, msg);
+    });
+
+    conn.on(stypes.AUTH, function (msg) {
+        var user = msg.username;
+        var hash = msg.hash;
+        var resp = U.auth(user, hash, user_store);
+        var authed = resp.success;
+        user_store = resp.store;
+        conn.emit(stypes.AUTH_RESP, { 'authed': true });
     });
 
     conn.on('disconnect', function () {
+        // TODO remove user from store so they can log in again
         console.log('user disconnected ' + conn.id);
     });
 });

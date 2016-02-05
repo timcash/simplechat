@@ -3,7 +3,7 @@ import react         from 'react';
 import {render}      from 'react-dom';
 import h             from 'react-hyperscript';
 import redux         from 'redux';
-
+import * as stypes   from './stypes.js';
 const { Component } = react;
 
 class ChatApp extends Component {
@@ -13,5 +13,13 @@ class ChatApp extends Component {
         ]);
     }
 }
+
+setInterval(()=>{
+    _Socket.emit(stypes.ADD_MSG, "a message");
+}, 1000);
+
+_Socket.on(stypes.REPEAT_MSG, (msg)=>{
+    console.log(msg);
+});
 
 render(h(ChatApp), document.getElementById('root'));

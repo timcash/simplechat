@@ -31,14 +31,27 @@ let socket = io(server);
 //
 // ===================================================
 
+
+let user_store = {};
+
 socket.on('connection', (conn) => {
     console.log(`connection ${conn.id}`);
 
     conn.on(stypes.ADD_MSG, (msg) => {
-        io.emit(stypes.REPEAT_MSG, msg);
+        socket.emit(stypes.REPEAT_MSG, msg);
+    });
+
+    conn.on(stypes.AUTH, (msg) => {
+        let user    = msg.username;
+        let hash    = msg.hash;
+        let resp    = U.auth(user, hash, user_store);
+        let authed  = resp.success;
+        user_store  = resp.store;
+        conn.emit(stypes.AUTH_RESP, {'authed':true});
     });
 
     conn.on('disconnect', () => {
+        // TODO remove user from store so they can log in again
         console.log(`user disconnected ${conn.id}`);
     });
 });
