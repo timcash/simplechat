@@ -22,6 +22,14 @@ var _stypes = require('./js/stypes.js');
 
 var stypes = _interopRequireWildcard(_stypes);
 
+var _actions = require('./js/actions.js');
+
+var actions = _interopRequireWildcard(_actions);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -50,14 +58,41 @@ var socket = (0, _socket2.default)(server);
 //                    CONNECT
 //
 // ===================================================
-
 var user_store = {};
+
+var random = function random(low, high) {
+    return Math.random() * (high - low) + low;
+};
+
+var serverTimeMessage = function serverTimeMessage(socket, store) {
+    console.log('Sending server time to ' + Object.keys(store).length + ' clients');
+    var t = (0, _moment2.default)().format('MMMM Do YYYY, h:mm:ss a');
+    var m = actions.repeatMessage('server', 'server time is ' + t);
+    socket.emit(m.type, m);
+};
+
+var beginServerTime = function beginServerTime(socket, user_store) {
+
+    var sendATime = function sendATime() {
+        serverTimeMessage(socket, user_store);
+        var wait = random(30000, 50000);
+        console.log('time to next servertime ' + wait + ' ms');
+        setTimeout(function () {
+            sendATime();
+        }, wait);
+    };
+
+    sendATime();
+};
+
+beginServerTime(socket, user_store);
 
 socket.on('connection', function (conn) {
     console.log('connection ' + conn.id);
 
     conn.on(stypes.ADD_MSG, function (msg) {
-        socket.emit(stypes.REPEAT_MSG, msg);
+        var m = actions.repeatMessage('author temp', msg.message);
+        socket.emit(m.type, m);
     });
 
     conn.on(stypes.AUTH_REQ, function (msg) {

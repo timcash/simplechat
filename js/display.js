@@ -15,8 +15,32 @@ export const messageList = ({messages}) => {
     return h('div', children);
 };
 
-export const sendMessageInput = ({onKeyPress}) => {
-    return h('div', {}, h('input', {onKeyPress}));
+export const sendMessageInput = ({onEnterPress}) => {
+    let input;
+    return h('div', {}, h('input', {
+        placeholder: 'type here',
+        ref:(n)=>{
+            input=n;
+        },
+        onKeyPress:(e)=>{
+            if(e.key === 'Enter') {
+                onEnterPress(input.value);
+                input.value = '';
+            }
+        }
+    }));
+};
+
+export const chatForm = ({visible, messages, onEnterPress}) => {
+    let style = {
+        'display': visible
+    };
+
+    return h('div', {style}, [
+        h('h4', 'messages'),
+        h(messageList, {messages}),
+        h(sendMessageInput, {onEnterPress})
+    ]);
 };
 
 export const usernameInput = ({onChange}) => {
@@ -51,7 +75,7 @@ export const loginButton = ({onClick, style}) => {
 
 export const loginForm = ({username, password, visible, onUserChange, onPasswordChange, onLoginClick}) => {
     let style = {
-        'visibility': visible
+        'display': visible
     };
 
     return h('div', {style}, [

@@ -9,23 +9,35 @@ import { connect }  from 'react-redux';
 // ===================================================
 
 const isLoginFormVisible = (token) => {
-    if(token === 'failed') return 'visible';
-    if(token === 'authing') return 'visible';
-    if(token === 'deauthed') return 'visible';
-    if(token === undefined) return 'visible';
-    if(token === null) return 'visible';
-    return 'hidden';
+    if(token === 'failed') return 'block';
+    if(token === 'authing') return 'block';
+    if(token === 'deauthed') return 'block';
+    if(token === undefined) return 'block';
+    if(token === null) return 'block';
+    return 'none';
 };
 
-const stateToPropsListContainer = ({messages}) => {
-    return { messages };
+const isChatFormVisible = (token) => {
+    if(isLoginFormVisible(token) === 'block') return 'none';
+    return 'block';
 };
 
-export const messageListContainer = connect(
-    stateToPropsListContainer,
-    null
-)(display.messageList);
+const stateToPropsChatForm = ({messages, authed}) => {
+    return { messages, visible:isChatFormVisible(authed) };
+};
 
+const dispatchToPropsChatForm = (dispatch) => {
+    return {
+        onEnterPress: (value) => {
+            dispatch(actions.addMessage(value));
+        }
+    };
+};
+
+export const chatFormContainer = connect(
+    stateToPropsChatForm,
+    dispatchToPropsChatForm
+)(display.chatForm);
 
 const stateToPropsLoginForm = ({username, password, authed}) => {
     return {username, password, visible:isLoginFormVisible(authed)};

@@ -30,22 +30,20 @@ actionMap[stypes.PASSWORD_CHANGE]   = reducers.passwordChange;
 actionMap[stypes.USER_CHANGE]       = reducers.userChange;
 actionMap[stypes.AUTH_RESP]         = reducers.authResponse;
 actionMap[stypes.AUTH_REQ]          = reducers.authRquest;
+actionMap[stypes.ADD_MSG]           = reducers.addMessage;
+actionMap[stypes.REPEAT_MSG]        = reducers.repeatMessage;
 
 let store = createStore((s={messages:[]}, a)=>{
     if(actionMap[a.type]) return actionMap[a.type](s, a);
     return s;
 }, applyMiddleware(loggerMiddleware));
 
-let s = {
-    color:"green"
-};
-
 class ChatApp extends Component {
     render() {
         return h('div', {}, [
-            h('h3', {style:s}, 'SIMPLE CHAT'),
+            h('h4', 'SIMPLE CHAT'),
             h(containers.loginFormContainer),
-            h(containers.messageListContainer)
+            h(containers.chatFormContainer)
         ]);
     }
 }
@@ -56,12 +54,8 @@ class ChatApp extends Component {
 //
 // ===================================================
 
-setInterval(()=>{
-    _Socket.emit(stypes.ADD_MSG, "a message");
-}, 1000);
-
 _Socket.on(stypes.REPEAT_MSG, (msg)=>{
-    console.log(msg);
+    store.dispatch(msg);
 });
 
 _Socket.on(stypes.AUTH_RESP, (msg)=>{

@@ -1,10 +1,13 @@
 import * as stypes from './stypes.js';
 
 export const addMessage = (message) => {
-    return {
+    let m = {
         type: stypes.ADD_MSG,
         message: message
     };
+
+    _Socket.emit(m.type, m);
+    return m;
 };
 
 export const userChange = (user) => {
@@ -36,8 +39,7 @@ export const authRequest = (username, hash) => {
         hash: hash
     };
 
-    _Socket.emit(stypes.AUTH_REQ, m);
-
+    _Socket.emit(m.type, m);
     return m;
 };
 

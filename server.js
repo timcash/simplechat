@@ -12,7 +12,9 @@ import express from 'express';
 import http from 'http';
 import io from 'socket.io';
 import * as U from './js/serverutils.js';
-import * as stypes from './js/stypes.js';
+import * as stypes  from './js/stypes.js';
+import * as actions from './js/actions.js';
+import moment       from 'moment';
 
 // ===================================================
 //
@@ -30,15 +32,41 @@ let socket = io(server);
 //                    CONNECT
 //
 // ===================================================
-
-
 let user_store = {};
+
+const random = (low, high) => {
+    return Math.random() * (high - low) + low;
+};
+
+const serverTimeMessage = (socket, store) => {
+    console.log(`Sending server time to ${Object.keys(store).length} clients`);
+    let t = moment().format('MMMM Do YYYY, h:mm:ss a');
+    let m = actions.repeatMessage('server', `server time is ${t}`);
+    socket.emit(m.type, m);
+};
+
+const beginServerTime = (socket, user_store) => {
+
+    const sendATime = () => {
+        serverTimeMessage(socket, user_store);
+        let wait = random(30000,50000);
+        console.log(`time to next servertime ${wait} ms`);
+        setTimeout(()=>{
+            sendATime();
+        }, wait);
+    };
+
+    sendATime();
+};
+
+beginServerTime(socket, user_store);
 
 socket.on('connection', (conn) => {
     console.log(`connection ${conn.id}`);
 
     conn.on(stypes.ADD_MSG, (msg) => {
-        socket.emit(stypes.REPEAT_MSG, msg);
+        let m = actions.repeatMessage('author temp', msg.message);
+        socket.emit(m.type, m);
     });
 
     conn.on(stypes.AUTH_REQ, (msg) => {
