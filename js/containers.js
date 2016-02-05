@@ -1,5 +1,5 @@
 import * as display from './display.js';
-import * as actions from './actions.js'
+import * as actions from './actions.js';
 import { connect }  from 'react-redux';
 
 // ===================================================
@@ -11,14 +11,6 @@ import { connect }  from 'react-redux';
 const stateToPropsListContainer = ({messages}) => {
     return { messages };
 };
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         onTodoClick: (id) => {
-//             dispatch(toggleTodo(id));
-//         }
-//     };
-// };
 
 export const messageListContainer = connect(
     stateToPropsListContainer,
@@ -33,10 +25,10 @@ const stateToPropsLoginForm = ({username, password}) => {
 const dispatchToPropsLoginForm = (dispatch) => {
     return {
         onUserChange: (value) => {
-            dispatch(actions.userChanged(value));
+            dispatch(actions.userChange(value));
         },
         onPasswordChange: (value) => {
-            dispatch(actions.passwordChanged(value));
+            dispatch(actions.passwordChange(value));
         },
         onLoginClick: (username, password) => {
             dispatch(actions.authRequest(username, password));
@@ -45,6 +37,6 @@ const dispatchToPropsLoginForm = (dispatch) => {
 };
 
 export const loginFormContainer = connect(
-    stateToPropsLoginFrom,
-    dispatchToPropsLoginFrom
+    stateToPropsLoginForm,
+    dispatchToPropsLoginForm
 )(display.loginForm);

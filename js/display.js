@@ -20,21 +20,37 @@ export const sendMessageInput = ({onKeyPress}) => {
 };
 
 export const usernameInput = ({onChange}) => {
-    return h('div', {}, h('input', {onChange:()=>onChange(this.value)}));
+    let input;
+    return h('div', {}, h('input', {
+        ref:(n)=>{
+            input=n;
+        },
+        onChange:()=>{
+            onChange(input.value);
+        }
+    }));
 };
 
 export const passwordInput = ({onChange}) => {
-    return h('div', {}, h('input', {onChange:()=>onChange(this.value)}));
+    let input;
+    return h('div', {}, h('input', {
+        ref:(n)=>{
+            input=n;
+        },
+        onChange:()=>{
+            onChange(input.value);
+        }
+    }));
 };
 
 export const loginButton = ({onClick, style}) => {
     return h('div', {onClick, style}, 'Login');
 };
 
-export const loginForm = ({onUserChange, onPasswordChange, onLoginClick}) => {
+export const loginForm = ({username, password, onUserChange, onPasswordChange, onLoginClick}) => {
     return h('div', {}, [
         h(usernameInput, {onChange:onUserChange}),
         h(passwordInput, {onChange:onPasswordChange}),
-        h(loginButton,   {onClick:onLoginClick})
+        h(loginButton,   {onClick:()=>onLoginClick(username, password)})
     ]);
 };

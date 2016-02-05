@@ -13,19 +13,25 @@ import h                        from 'react-hyperscript';
 import * as stypes              from './stypes.js';
 import * as displays            from './display.js';
 import * as containers          from './containers.js';
+import * as reducers            from './reducers.js';
 import createLogger             from 'redux-logger';
 
 const loggerMiddleware = createLogger();
 
 // ===================================================
 //
-//                    LOGIC
+//                    SETUP
 //
 // ===================================================
 
-const r = (s, a) => {
-    return {messages:['one', 'two', 'three']};
-};
+let actionMap = {};
+actionMap[stypes.PASSWORD_CHANGE]   = reducers.passwordChange;
+actionMap[stypes.USER_CHANGE]       = reducers.userChange;
+
+let store = createStore((s={messages:['one', 'two', 'three']}, a)=>{
+    if(actionMap[a.type]) return actionMap[a.type](s, a);
+    return s;
+}, applyMiddleware(loggerMiddleware));
 
 let s = {
     color:"green"
@@ -35,7 +41,7 @@ class ChatApp extends Component {
     render() {
         return h('div', {}, [
             h('h1', {style:s}, 'hello from react'),
-            h(containers.loginContainer),
+            h(containers.loginFormContainer),
             h(containers.messageListContainer)
         ]);
     }
@@ -60,8 +66,6 @@ _Socket.on(stypes.REPEAT_MSG, (msg)=>{
 //                    BEGIN APPLICATION
 //
 // ===================================================
-
-let store = createStore(r, applyMiddleware(loggerMiddleware));
 
 render(
   h(Provider, {store}, [h(ChatApp)]),
