@@ -91,7 +91,8 @@ socket.on('connection', function (conn) {
     console.log('connection ' + conn.id);
 
     conn.on(stypes.ADD_MSG, function (msg) {
-        var m = actions.repeatMessage('author temp', msg.message);
+        console.log('got message: ' + JSON.stringify(msg));
+        var m = actions.repeatMessage(msg.author, msg.message);
         socket.emit(m.type, m);
     });
 

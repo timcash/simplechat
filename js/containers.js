@@ -22,14 +22,14 @@ const isChatFormVisible = (token) => {
     return 'block';
 };
 
-const stateToPropsChatForm = ({messages, authed}) => {
-    return { messages, visible:isChatFormVisible(authed) };
+const stateToPropsChatForm = ({messages, authed, username}) => {
+    return { messages, visible:isChatFormVisible(authed), username};
 };
 
 const dispatchToPropsChatForm = (dispatch) => {
     return {
-        onEnterPress: (value) => {
-            dispatch(actions.addMessage(value));
+        onEnterPress: (username, value) => {
+            dispatch(actions.addMessage(username, value));
         }
     };
 };

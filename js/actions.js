@@ -1,8 +1,9 @@
 import * as stypes from './stypes.js';
 
-export const addMessage = (message) => {
+export const addMessage = (author, message) => {
     let m = {
         type: stypes.ADD_MSG,
+        author: author,
         message: message
     };
 

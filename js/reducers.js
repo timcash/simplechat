@@ -12,10 +12,12 @@ export const authResponse = (state, action) => {
     };
 };
 
-export const repeatMessage = (state = [], action) => {
+export const repeatMessage = (state, action) => {
     return {
         ...state,
-        messages: [...state.messages, action.message]
+        messages: [...state.messages,
+            {author:action.author, message:action.message}
+        ]
     };
 };
 
