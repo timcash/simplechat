@@ -21,6 +21,7 @@ System.config({
     "react": "npm:react@0.14.7",
     "react-dom": "npm:react-dom@0.14.7",
     "react-hyperscript": "npm:react-hyperscript@2.2.2",
+    "react-redux": "npm:react-redux@4.3.0",
     "redux": "npm:redux@3.2.1",
     "virtual-dom": "npm:virtual-dom@2.1.1",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -89,6 +90,10 @@ System.config({
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
+    "npm:invariant@2.2.0": {
+      "loose-envify": "npm:loose-envify@1.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:lodash@4.2.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -113,6 +118,15 @@ System.config({
     "npm:react-hyperscript@2.2.2": {
       "react": "npm:react@0.14.7",
       "virtual-hyperscript": "npm:virtual-hyperscript@4.6.0"
+    },
+    "npm:react-redux@4.3.0": {
+      "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.5",
+      "invariant": "npm:invariant@2.2.0",
+      "lodash": "npm:lodash@4.2.1",
+      "loose-envify": "npm:loose-envify@1.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.7",
+      "redux": "npm:redux@3.2.1"
     },
     "npm:react@0.14.7": {
       "fbjs": "npm:fbjs@0.6.1",
