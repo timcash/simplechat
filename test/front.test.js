@@ -87,22 +87,22 @@ describe('Redux Tests', function() {
         });
 
     });
-
-    describe('Display', function() {
-
-        it('messageView has the correct format', function() {
-
-            assert.deepEqual(ui, match);
-        });
-
-        it('messageList appends elements and has the correct format', function() {
-
-            assert.deepEqual(ui, match);
-        });
-
-        it('loginButton changes colors when authing', function() {
-
-            assert.deepEqual(ui, match);
-        });
-    });
+    // 
+    // describe('Display', function() {
+    //
+    //     it('messageView has the correct format', function() {
+    //
+    //         assert.deepEqual(ui, match);
+    //     });
+    //
+    //     it('messageList appends elements and has the correct format', function() {
+    //
+    //         assert.deepEqual(ui, match);
+    //     });
+    //
+    //     it('loginButton changes colors when authing', function() {
+    //
+    //         assert.deepEqual(ui, match);
+    //     });
+    // });
 });

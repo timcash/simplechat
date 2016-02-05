@@ -7,7 +7,7 @@ import h from 'react-hyperscript';
 // ===================================================
 
 export const messageView = ({message}) => {
-    return h('div', message);
+    return h('p.z-depth-1', message);
 };
 
 export const messageList = ({messages}) => {
@@ -37,7 +37,7 @@ export const chatForm = ({visible, messages, onEnterPress}) => {
     };
 
     return h('div', {style}, [
-        h('h4', 'messages'),
+        h('h6', 'Messages:'),
         h(messageList, {messages}),
         h(sendMessageInput, {onEnterPress})
     ]);
