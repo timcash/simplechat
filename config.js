@@ -23,6 +23,7 @@ System.config({
     "react-hyperscript": "npm:react-hyperscript@2.2.2",
     "react-redux": "npm:react-redux@4.3.0",
     "redux": "npm:redux@3.2.1",
+    "redux-logger": "npm:redux-logger@2.5.0",
     "virtual-dom": "npm:virtual-dom@2.1.1",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"

@@ -80,6 +80,7 @@ describe('Redux Tests', function() {
             let match = ['foobar'];
             assert.deepEqual(state, match);
         });
+        
     });
 
     describe('Display', function() {

@@ -8,12 +8,14 @@ import { Component }            from 'react';
 import L                        from 'lodash/fp';
 import { render }               from 'react-dom';
 import { Provider }             from 'react-redux';
-import redux                    from 'redux';
-import { createStore }          from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import h                        from 'react-hyperscript';
 import * as stypes              from './stypes.js';
 import * as displays            from './display.js';
 import * as containers          from './containers.js';
+import createLogger             from 'redux-logger';
+
+const loggerMiddleware = createLogger();
 
 // ===================================================
 //
@@ -33,11 +35,7 @@ class ChatApp extends Component {
     render() {
         return h('div', {}, [
             h('h1', {style:s}, 'hello from react'),
-            h(displays.usernameInput),
-            h(displays.passwordInput),
-            h(displays.loginButton, {onClick:(e)=>{
-                console.log("login");
-            }}),
+            h(containers.loginContainer),
             h(containers.messageListContainer)
         ]);
     }
@@ -63,7 +61,7 @@ _Socket.on(stypes.REPEAT_MSG, (msg)=>{
 //
 // ===================================================
 
-let store = createStore(r);
+let store = createStore(r, applyMiddleware(loggerMiddleware));
 
 render(
   h(Provider, {store}, [h(ChatApp)]),

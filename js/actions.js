@@ -7,6 +7,20 @@ export const addMessage = (message) => {
     };
 };
 
+export const userChange = (user) => {
+    return {
+        type: stypes.USER_CHANGE,
+        user: user
+    };
+};
+
+export const passwordChange = (password) => {
+    return {
+        type: stypes.PASSWORD_CHANGE,
+        password: password
+    };
+};
+
 export const repeatMessage = (author, message) => {
     return {
         type: stypes.REPEAT_MSG,

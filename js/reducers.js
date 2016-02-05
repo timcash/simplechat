@@ -13,5 +13,22 @@ export const authResponse = (state, action) => {
 };
 
 export const repeatMessage = (state = [], action) => {
-    return [...state, action.message];
+    return {
+        ...state,
+        messages: [...state.messages, action.message]
+    };
+};
+
+export const userChange = (state, action) => {
+    return {
+        ...state,
+        username: action.user
+    };
+};
+
+export const passwordChange = (state, action) => {
+    return {
+        ...state,
+        password: action.password
+    };
 };

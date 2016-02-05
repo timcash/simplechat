@@ -15,18 +15,26 @@ export const messageList = ({messages}) => {
     return h('div', children);
 };
 
-export const sendMessageInput = () => {
-    return h('div', {}, h('input'));
+export const sendMessageInput = ({onKeyPress}) => {
+    return h('div', {}, h('input', {onKeyPress}));
 };
 
-export const usernameInput = () => {
-    return h('div', {}, h('input'));
+export const usernameInput = ({onChange}) => {
+    return h('div', {}, h('input', {onChange:()=>onChange(this.value)}));
 };
 
-export const passwordInput = () => {
-    return h('div', {}, h('input'));
+export const passwordInput = ({onChange}) => {
+    return h('div', {}, h('input', {onChange:()=>onChange(this.value)}));
 };
 
-export const loginButton = ({onClick}) => {
-    return h('div', {onClick}, 'Login');
+export const loginButton = ({onClick, style}) => {
+    return h('div', {onClick, style}, 'Login');
+};
+
+export const loginForm = ({onUserChange, onPasswordChange, onLoginClick}) => {
+    return h('div', {}, [
+        h(usernameInput, {onChange:onUserChange}),
+        h(passwordInput, {onChange:onPasswordChange}),
+        h(loginButton,   {onClick:onLoginClick})
+    ]);
 };
