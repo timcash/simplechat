@@ -28,7 +28,7 @@ let actionMap = {};
 actionMap[stypes.PASSWORD_CHANGE]   = reducers.passwordChange;
 actionMap[stypes.USER_CHANGE]       = reducers.userChange;
 
-let store = createStore((s={messages:['one', 'two', 'three']}, a)=>{
+let store = createStore((s={messages:[]}, a)=>{
     if(actionMap[a.type]) return actionMap[a.type](s, a);
     return s;
 }, applyMiddleware(loggerMiddleware));
@@ -40,7 +40,7 @@ let s = {
 class ChatApp extends Component {
     render() {
         return h('div', {}, [
-            h('h1', {style:s}, 'hello from react'),
+            h('h3', {style:s}, 'SIMPLE CHAT'),
             h(containers.loginFormContainer),
             h(containers.messageListContainer)
         ]);

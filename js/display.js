@@ -22,6 +22,7 @@ export const sendMessageInput = ({onKeyPress}) => {
 export const usernameInput = ({onChange}) => {
     let input;
     return h('div', {}, h('input', {
+        placeholder: 'username',
         ref:(n)=>{
             input=n;
         },
@@ -34,6 +35,7 @@ export const usernameInput = ({onChange}) => {
 export const passwordInput = ({onChange}) => {
     let input;
     return h('div', {}, h('input', {
+        placeholder: 'password',
         ref:(n)=>{
             input=n;
         },
@@ -44,13 +46,16 @@ export const passwordInput = ({onChange}) => {
 };
 
 export const loginButton = ({onClick, style}) => {
-    return h('div', {onClick, style}, 'Login');
+    return h('a.waves-effect.waves-light.btn', {onClick, style}, 'Login');
 };
 
 export const loginForm = ({username, password, onUserChange, onPasswordChange, onLoginClick}) => {
     return h('div', {}, [
         h(usernameInput, {onChange:onUserChange}),
         h(passwordInput, {onChange:onPasswordChange}),
-        h(loginButton,   {onClick:()=>onLoginClick(username, password)})
+        h(loginButton,   {onClick:(e)=>{
+            e.preventDefault();
+            onLoginClick(username, password);
+        }})
     ]);
 };
