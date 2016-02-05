@@ -49,7 +49,7 @@ const beginServerTime = (socket, user_store) => {
 
     const sendATime = () => {
         serverTimeMessage(socket, user_store);
-        let wait = random(30000,50000);
+        let wait = random(300000,500000);
         console.log(`time to next servertime ${wait} ms`);
         setTimeout(()=>{
             sendATime();

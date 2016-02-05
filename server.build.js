@@ -75,7 +75,7 @@ var beginServerTime = function beginServerTime(socket, user_store) {
 
     var sendATime = function sendATime() {
         serverTimeMessage(socket, user_store);
-        var wait = random(30000, 50000);
+        var wait = random(300000, 500000);
         console.log('time to next servertime ' + wait + ' ms');
         setTimeout(function () {
             sendATime();

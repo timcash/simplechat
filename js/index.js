@@ -18,7 +18,6 @@ import * as actions             from './actions.js';
 import createLogger             from 'redux-logger';
 
 const loggerMiddleware = createLogger();
-
 // ===================================================
 //
 //                    SETUP
@@ -41,7 +40,6 @@ let store = createStore((s={messages:[]}, a)=>{
 class ChatApp extends Component {
     render() {
         return h('div', {}, [
-            h('h4', 'SIMPLE CHAT'),
             h(containers.loginFormContainer),
             h(containers.chatFormContainer)
         ]);

@@ -1,4 +1,5 @@
 import h from 'react-hyperscript';
+import Infinite from 'react-infinite';
 
 // ===================================================
 //
@@ -7,7 +8,7 @@ import h from 'react-hyperscript';
 // ===================================================
 
 export const messageView = ({message}) => {
-    return h('p.z-depth-1', message);
+    return h('div.z-depth-1', {style:{margin:'5px', padding:'10px'}}, message);
 };
 
 export const messageList = ({messages}) => {
@@ -70,7 +71,7 @@ export const passwordInput = ({onChange}) => {
 };
 
 export const loginButton = ({onClick, style}) => {
-    return h('a.waves-effect.waves-light.btn', {onClick, style}, 'Login');
+    return h('a.btn.orange', {onClick, style}, 'Login');
 };
 
 export const loginForm = ({username, password, visible, onUserChange, onPasswordChange, onLoginClick}) => {
